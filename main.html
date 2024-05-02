@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+ body {
+        background-color: #facece;
+}
+main{
+    display: flex;
+}
+header {
+    background: linear-gradient(45deg, #800735, #000000, #056279);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    animation: gradient-animation 10s infinite;
+}
+
+nav {
+            background-color: #000000;
+            color:#800735;
+            padding: 15px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            display: inline;
+            margin-right: 10px;
+            position: relative;
+        }
+        .container{
+            margin: 2%;
+        }
+        .container-2{
+            border: solid;
+        }
+        aside {
+  border: #800735 solid;
+  width: 20%;
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+  float: right;
+  font-style: italic;
+  color: #29627e;
+}
+footer {
+            background-color: #1e0122;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+        }
+       
+    </style>
+</head>
+<body>
+    <header>
+<h1>Enanas negra</h1>
+<h2>Перекладач</h2>
+    </header>
+    <nav>
+     <ul>
+        <li><a href="#"></a>Реєстрація</li>
+        <li><a href="#"></a>Про нас</li>
+        <li id="room">q</li>
+     </ul>
+    </nav>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="container-2">
+                    <label for="beforeText">Введіть текст:</label>
+                    <textarea id="beforeText"></textarea>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="container-2">
+                    <label for="afterText">Введіть текст:</label>
+                    <textarea id="afterText"></textarea>
+                </div>
+            </div>
+        </section>
+         <aside>
+             <div>
+                 <div id="history">
+     Q
+                 </div>
+             </div>
+            
+         </aside>
+    </main>
+    <footer>
+      <p>&copy; 2024 Enanas Negra</p>  
+    </footer>
+</body>
+</html>
