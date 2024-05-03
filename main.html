@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Enanas Negra</title>
     <style>
  body {
+    background-color: antiquewhite;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-        background-color: #cac3da;
         margin: 0;
             padding: 0;
-            height: 100%;
+         height: 100%;
             
 }
 main{
@@ -25,7 +25,10 @@ header {
     padding: 6px;
     animation: gradient-animation 10s infinite;
 }
-
+button{
+  height: 70px;
+  width: 100px;
+}
 nav {
     
   background-color: #14011d;
@@ -57,9 +60,9 @@ nav {
             margin: 2%;
         }
         textarea {
-    width: 100%;
-    height: 100%;
-    border: solid;
+            width: 450px;
+    height: 200px;
+    border: 5px outset #bd5df8;
     padding: 0;
     margin: 0;
 }
@@ -75,6 +78,11 @@ nav {
     height: 50%;
     width: 200px;
 }
+main{
+    display: flex;
+    justify-content: space-evenly;
+
+}
 footer {
             background-color: #1e0122;
             color: #ffffff;
@@ -82,7 +90,13 @@ footer {
             padding: 2px;
             margin-top: auto;
         }
-       
+       #TranslateButton{
+       display: flex;
+        justify-content:end;
+        align-items: center;
+        margin-top: 20%;
+        
+       }
     </style>
 </head>
 <body>
@@ -108,6 +122,9 @@ footer {
                 </div>
             </div>
         </section>
+        <div id="TranslateButton">
+            <button>Перекласти</button> 
+        </div>
         <section>
             <div class="container">
                 <div class="container-2">
@@ -116,6 +133,7 @@ footer {
                 </div>
             </div>
         </section>
+        
          <aside>
              <div>
                 <i>History</i>
