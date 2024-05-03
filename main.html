@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-        background-color: #facece;
+        background-color: #cac3da;
         margin: 0;
             padding: 0;
             height: 100%;
@@ -22,14 +22,15 @@ header {
     background: linear-gradient(45deg, #800735, #000000, #056279);
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 6px;
     animation: gradient-animation 10s infinite;
 }
 
 nav {
-            background-color: #14011d;
-            color: #ffffff;
-            padding: 15px;
+    
+  background-color: #14011d;
+ color: #ffffff;
+ padding: 15px;
         }
         nav ul {
             list-style-type: none;
@@ -55,23 +56,30 @@ nav {
         .container{
             margin: 2%;
         }
-        .container-2{
-            border: solid;
-        }
+        textarea {
+    width: 100%;
+    height: 100%;
+    border: solid;
+    padding: 0;
+    margin: 0;
+}
         aside {
-  border: #800735 solid;
-  width: 20%;
+  border: #ec4a88 solid;
   padding-left: 0.5rem;
   margin-left: 0.5rem;
   float: right;
   font-style: italic;
-  color: #29627e;
+  color: #353038;
+  position: fixed;
+    right: 0;
+    height: 50%;
+    width: 200px;
 }
 footer {
             background-color: #1e0122;
             color: #ffffff;
             text-align: center;
-            padding: 10px;
+            padding: 2px;
             margin-top: auto;
         }
        
@@ -94,26 +102,27 @@ footer {
         <section>
             <div class="container">
                 <div class="container-2">
-                    <label for="beforeText">Введіть текст:</label>
+                    <label for="beforeText">Введіть текст:</label>   
                     <textarea id="beforeText"></textarea>
+                    
                 </div>
             </div>
         </section>
         <section>
             <div class="container">
                 <div class="container-2">
-                    <label for="afterText">Введіть текст:</label>
+                    <label for="afterText">Перекладенний текст:</label>
                     <textarea id="afterText"></textarea>
                 </div>
             </div>
         </section>
          <aside>
              <div>
+                <i>History</i>
                  <div id="history">
-     Q
+    
                  </div>
              </div>
-            
          </aside>
     </main>
     <footer>
