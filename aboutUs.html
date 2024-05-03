@@ -6,7 +6,7 @@
     <title>Enanas Negra</title>
     <style>
         body {
-        background-color: rgb(206, 198, 211);
+        background-color: rgb(255, 255, 255);
         display: flex;
         flex-direction: column;
         min-height: 100vh;
@@ -16,7 +16,7 @@
 }  
 
 header {
-    background: linear-gradient(45deg, #800735, #000000, #056279);
+    background: linear-gradient(45deg, #2c043f, #000000, #01685e);
     color: #fff;
     text-align: center;
     padding: 6px;
@@ -49,9 +49,11 @@ nav a {
 nav a:hover { background-color: #580679;}
 
 main{
-    display: flex;
-    justify-content: center;
+     display: flex;
+            flex-direction: column;
+            align-items: center;
 }
+
 footer {
             background-color: #1e0122;
             color: #ffffff;
@@ -59,6 +61,33 @@ footer {
             padding: 2px;
             margin-top: auto;
         }
+
+#h1center{
+    display: flex;
+    justify-content: center;
+}
+.text{
+    margin: 1.5%;
+}
+
+.rozrobniki{
+    display: flex;
+    flex-direction: row;
+    margin: 1.5%;
+}
+
+
+img {
+    border: none;
+  height: 500px;
+  width: 450px;
+  margin: 50px; 
+  box-shadow: 10px 10px 30px #011b61
+
+}
+
+
+
     </style>
 </head>
 <body>
@@ -73,5 +102,44 @@ footer {
                 <li><a href="aboutUs.html">Про нас</a></li>
              </ul>
             </nav>
+
+    <main>
+        <div class="text">
+            <h1 id="h1center">Вітаємо на Enanas Negra!</h1>
+            <h2>
+                Ми - команда ентузіастів з трьох розробників, які стоять за цим захоплюючим проектом. Наша мета - забезпечити доступність і зручність у перекладі для усіх, хто це потребує.
+                <br>
+                Наша історія почалася з бажання зробити світ кращим та більш зрозумілим, зламуючи мовні бар'єри. Ми глибоко віримо, що кожна мова має свою важливість і красу, і кожен повинен мати можливість спілкуватися ними.
+                <br>
+                Щодня ми працюємо над вдосконаленням нашого сервісу, додаванням нових мов та покращенням якості перекладу. Ми пишаємося нашим досвідом та вмінням допомогти вам зрозуміти і бути зрозумілими у будь-якій мові.
+                <br>
+                Будь ласка, приєднуйтесь до нас у нашій подорожі за відкритістю, розумінням і спілкуванням через мови!
+                <br>
+                З любов'ю,
+                Команда Enanas Negra
+            </h2>
+        </div>
+        <h1>Головні розробники проекту: </h1>
+   <div class="rozrobniki">
+      <div class="DevContainer">
+         <div class="devYan">
+          <img src="yan.jpg" alt="Yanosh">
+          <h1 style="color: #2c043f;"><i>Außenseiter</i></h1>
+          <h2 style="color: #2c043f;">Він же: <u>SaintYanLol</u></h2>
+         </div>
+     </div>
+            
+        <div class="DevContainer">
+         <div class="devRoma">
+        <img src="roma.jpg" alt="Roman">
+        <h1 style="color:#01685e;"><i>AlahLaMor</i></h1>
+        <h2 style="color:#01685e;">Він же: <u>StarFox</u></h2>
+         </div> 
+     </div>
+     </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Enanas Negra</p>  
+      </footer>
 </body>
 </html>
