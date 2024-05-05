@@ -1,0 +1,17 @@
+# Використовуємо офіційний образ Node.js в якості базового
+FROM node:18
+
+# Створюємо робочу директорію для додатку
+WORKDIR /app
+
+# Копіюємо файли package.json та package-lock.json
+COPY package*.json ./
+
+# Встановлюємо залежності
+RUN npm install
+
+# Копіюємо решту файлів додатку
+COPY . .
+
+# Встановлюємо драйвер для Microsoft SQL Server
+RUN npm install mssql
