@@ -27,6 +27,7 @@
       animation: gradient-animation 10s infinite;
     }
 
+
     button {
       height: 70px;
       width: 100px;
@@ -78,6 +79,7 @@
       text-align: center;
       padding: 2px;
       margin-top: auto;
+      
     }
 
     .form {
@@ -280,14 +282,15 @@
        <li><a href="main.html">Головна</a></li>
        <li><a href="register.html">Реєстрація</a></li>
        <li><a href="aboutUs.html">Про нас</a></li>
+
     </ul>
     <div class="avatar-container">
-      <img src="Img/аватар.png" alt="Avatar" class="avatar">
+      <img src="image/hellomini.png" alt="Avatar" class="avatar">
       <div class="user-details">
-          <p id="user-name">Ім'я користувача</p>
+          <input type="text" id="user-name" placeholder="Введіть ваше ім'я">
           <p id="user-email">Електронна пошта</p>
       </div>
-  </div>
+    </div>    
    </nav>
    <main>
     <div class="card">
@@ -315,9 +318,12 @@
       </div>
     </div>  
   </main>
+
   <footer>
     <p>&copy; 2024 Enanas Negra</p>
   </footer>
   <script src="js/reg.js"></script>
+  <script src="js/user.js"></script>
+
 </body>
 </html>
