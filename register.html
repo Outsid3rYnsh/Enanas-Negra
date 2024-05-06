@@ -213,6 +213,63 @@
       background-color: red;
       color: white;
     }
+    .avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.user-details {
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    display: none;
+    text-align: center;
+    font-family: 'Poppins', sans-serif; 
+}
+
+.user-details p {
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.user-details #user-name {
+    font-weight: bold;
+}
+
+.user-details button {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+    margin-top: 20px;
+}
   </style>
 </head>
 <body>
@@ -227,6 +284,13 @@
        <li><a href="aboutUs.html">Про нас</a></li>
 
     </ul>
+    <div class="avatar-container">
+      <img src="Img/аватар.png" alt="Avatar" class="avatar">
+      <div class="user-details">
+          <p id="user-name">Ім'я користувача</p>
+          <p id="user-email">Електронна пошта</p>
+      </div>
+  </div>
    </nav>
    <main>
     <div class="card">
