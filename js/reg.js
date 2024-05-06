@@ -8,6 +8,20 @@ document.addEventListener('DOMContentLoaded', function() {
   const signUpButton = document.querySelector('button:nth-child(2)');
   const forgotPasswordButton = document.querySelector('button:nth-child(3)');
 
+  // Функція для збереження даних користувача в localStorage
+  function saveUser(email, password) {
+    const user = { email, password };
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    users.push(user);
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  // Функція для перевірки даних користувача
+  function checkUser(email, password) {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    return users.some(user => user.email === email && user.password === password);
+  }
+
   // Обробник події для кнопки "Sign Up"
   signUpButton.addEventListener('click', () => {
     const email = emailInput.value;
@@ -15,17 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Перевірка, чи всі поля заповнені
     if (email && password) {
-      // Тут ви можете додати логіку для відправки даних на сервер
-      // та обробки відповіді (наприклад, використовуючи fetch або XMLHttpRequest)
+      // Перевірка, чи користувач з таким email вже існує
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const existingUser = users.find(user => user.email === email);
 
-      // Для прикладу, просто виводимо введені дані в консоль
-      console.log('Email:', email);
-      console.log('Password:', password);
-
-      alert('Реєстрація пройшла успішно!');
-      // Очищаємо поля введення після успішної реєстрації
-      emailInput.value = '';
-      passwordInput.value = '';
+      if (existingUser) {
+        alert('Користувач з таким email вже існує');
+      } else {
+        saveUser(email, password);
+        alert('Реєстрація пройшла успішно!');
+        emailInput.value = '';
+        passwordInput.value = '';
+      }
     } else {
       alert('Будь ласка, введіть свою електронну пошту та пароль.');
     }
@@ -36,18 +51,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const email = emailInput.value;
     const password = passwordInput.value;
 
-    // Тут ви можете додати логіку для перевірки введених даних
-    // та авторизації користувача (наприклад, використовуючи fetch або XMLHttpRequest)
-
-    // Для прикладу, просто виводимо введені дані в консоль
-    console.log('Email:', email);
-    console.log('Password:', password);
+    // Перевірка, чи введені дані відповідають збереженим даним користувача
+    if (checkUser(email, password)) {
+      alert('Авторизація пройшла успішно!');
+    } else {
+      alert('Невірний email або пароль');
+    }
   });
 
   // Обробник події для кнопки "Forgot Password"
   forgotPasswordButton.addEventListener('click', () => {
-    // Тут ви можете додати логіку для відновлення пароля
-    // (наприклад, надсилання електронного листа з посиланням на скидання пароля)
-    alert('Ви будете перенаправлені на сторінку скидання пароля.');
+    const email = prompt('Введіть свій email для відновлення пароля');
+
+    if (email) {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const user = users.find(user => user.email === email);
+
+      if (user) {
+        const newPassword = prompt('Введіть новий пароль');
+        if (newPassword) {
+          user.password = newPassword;
+          localStorage.setItem('users', JSON.stringify(users));
+          alert('Пароль було успішно оновлено');
+        }
+      } else {
+        alert('Користувач з таким email не знайдено');
+      }
+    }
   });
 });
