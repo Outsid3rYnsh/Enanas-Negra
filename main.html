@@ -157,37 +157,32 @@ select:hover {
       <p>&copy; 2024 Enanas Negra</p>  
     </footer>
     <script>
+       const beforeText = localStorage.getItem('beforeText') || '';
+        const afterText = localStorage.getItem('afterText') || '';
+        const sourceLanguage = localStorage.getItem('sourceLanguage') || '';
+        const targetLanguage = localStorage.getItem('targetLanguage') || '';
+
+        // Встановлюємо значення у відповідні елементи форми
+        document.getElementById('beforeText').value = beforeText;
+        document.getElementById('afterText').value = afterText;
+        document.getElementById('sourceLanguage').value = sourceLanguage;
+        document.getElementById('targetLanguage').value = targetLanguage;
+
+        // Обробник події кліку на кнопці Save
         document.getElementById('saveButton').addEventListener('click', function() {
-    var beforeText = document.getElementById('beforeText').value;
-    var sourceLanguage = document.getElementById('sourceLanguage').value;
-    var targetLanguage = document.getElementById('targetLanguage').value;
+            // Отримуємо значення з полів форми
+            const beforeTextValue = document.getElementById('beforeText').value;
+            const afterTextValue = document.getElementById('afterText').value;
+            const sourceLanguageValue = document.getElementById('sourceLanguage').value;
+            const targetLanguageValue = document.getElementById('targetLanguage').value;
 
-    // Відправка POST-запиту на сервер
-    fetch('/saveTranslation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            beforeText: beforeText,
-            sourceLanguage: sourceLanguage,
-            targetLanguage: targetLanguage
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            alert('Дані успішно відправлені на сервер.');
-        } else {
-            alert('Сталася помилка під час відправлення даних на сервер.');
-        }
-    })
-    .catch(error => {
-        console.error('Сталася помилка:', error);
-        alert('Сталася помилка під час відправлення даних на сервер.');
-    });
-});
-
-    </script>
+            // Зберігаємо значення у localStorage
+            localStorage.setItem('beforeText', beforeTextValue);
+            localStorage.setItem('afterText', afterTextValue);
+            localStorage.setItem('sourceLanguage', sourceLanguageValue);
+            localStorage.setItem('targetLanguage', targetLanguageValue);
+        });</script>
+        
     <script src="js/languageSelection.js"></script>
     <script src="js/translate.js"></script>
 </body>
