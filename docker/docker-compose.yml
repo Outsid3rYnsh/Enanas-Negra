@@ -3,7 +3,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.web
     ports:
       - "3000:3000"
     environment:
@@ -22,8 +22,11 @@ services:
       SA_PASSWORD: "YourStrong!Passw0rd"
       ACCEPT_EULA: "Y"
 
-  base:
-    build:
-      context: .
-      dockerfile: Dockerfile.base
-    image: node-app-base
+  httpd:
+    image: httpd:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./httpd.conf:/usr/local/apache2/conf/
+    depends_on:
+      - web
