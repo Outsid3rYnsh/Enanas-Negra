@@ -157,10 +157,10 @@ select:hover {
       <p>&copy; 2024 Enanas Negra</p>  
     </footer>
     <script>
-       const beforeText = localStorage.getItem('beforeText') || '';
-        const afterText = localStorage.getItem('afterText') || '';
-        const sourceLanguage = localStorage.getItem('sourceLanguage') || '';
-        const targetLanguage = localStorage.getItem('targetLanguage') || '';
+       localStorage.getItem('beforeText') || '';
+       localStorage.getItem('afterText') || '';
+        localStorage.getItem('sourceLanguage') || '';
+        localStorage.getItem('targetLanguage') || '';
 
         // Встановлюємо значення у відповідні елементи форми
         document.getElementById('beforeText').value = beforeText;
@@ -185,5 +185,6 @@ select:hover {
         
     <script src="js/languageSelection.js"></script>
     <script src="js/translate.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
