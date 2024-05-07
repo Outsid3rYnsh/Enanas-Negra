@@ -122,7 +122,6 @@ select:hover {
      </ul>
     </nav>
     <main>
-        <form action="/save" method="post">
             <section>
                 <div class="container">
                     <div class="container-2">
@@ -142,7 +141,6 @@ select:hover {
                     </div>
                 </div>
             </section>
-        </form>
       
       
        <aside>
@@ -158,6 +156,38 @@ select:hover {
     <footer>
       <p>&copy; 2024 Enanas Negra</p>  
     </footer>
+    <script>
+        document.getElementById('saveButton').addEventListener('click', function() {
+    var beforeText = document.getElementById('beforeText').value;
+    var sourceLanguage = document.getElementById('sourceLanguage').value;
+    var targetLanguage = document.getElementById('targetLanguage').value;
+
+    // Відправка POST-запиту на сервер
+    fetch('/saveTranslation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            beforeText: beforeText,
+            sourceLanguage: sourceLanguage,
+            targetLanguage: targetLanguage
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Дані успішно відправлені на сервер.');
+        } else {
+            alert('Сталася помилка під час відправлення даних на сервер.');
+        }
+    })
+    .catch(error => {
+        console.error('Сталася помилка:', error);
+        alert('Сталася помилка під час відправлення даних на сервер.');
+    });
+});
+
+    </script>
     <script src="js/languageSelection.js"></script>
     <script src="js/translate.js"></script>
 </body>
