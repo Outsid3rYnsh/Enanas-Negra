@@ -1,17 +1,14 @@
-# Використовуємо офіційний образ Node.js в якості базового
-FROM node:18
+# Використовуємо офіційний образ MongoDB
+FROM mongo:latest
 
-# Створюємо робочу директорію для додатку
-WORKDIR /app
+ENV MONGODB_HOST="mongodb://mongo:27017"
+ENV MONGODB_DATABASE="TransHistory"
+ENV MONGODB_COLLECTION="SavedHistory"
 
-# Копіюємо файли package.json та package-lock.json
-COPY package*.json ./
 
-# Встановлюємо залежності
-RUN npm install
+EXPOSE 27017
 
-# Копіюємо решту файлів додатку
-COPY . .
+# Запускаємо MongoDB
+CMD ["mongod"]
 
-# Встановлюємо драйвер для Microsoft SQL Server
-RUN npm install mssql
+

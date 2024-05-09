@@ -1,8 +1,9 @@
-# Використовуємо базовий образ Apache HTTP Server
-FROM httpd:2.4
+FROM nginx:latest
 
-# Копіюємо файли додатку до директорії, яку використовує Apache для веб-сторінок
-COPY . /usr/local/apache2/htdocs/
 
-# Відкриваємо порт 80, якщо потрібно доступ до сервера зовні
-EXPOSE 80
+COPY . /usr/share/nginx/html
+
+EXPOSE 80 
+
+
+CMD ["nginx", "-g", "daemon off;"]

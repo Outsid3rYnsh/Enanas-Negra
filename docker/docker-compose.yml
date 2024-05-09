@@ -1,32 +1,33 @@
-version: '3'
+version: "3.8"
+
 services:
+
+  # Служба для бази даних MongoDB
+  db:
+    # Збираємо контейнер бази даних з Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+
+    # Відкриваємо порт 27017 на зовнішньому і внутрішньому інтерфейсі
+    ports:
+      - "27017:27017"
+
+    # Мапуємо локальний каталог для збереження даних MongoDB
+    volumes:
+      - C:\Users\varga\Enanas-Negra\volumes:/data/db
+
+  # Служба для веб-додатку
   web:
+    # Збираємо контейнер веб-додатку з Dockerfile.web
     build:
       context: .
       dockerfile: Dockerfile.web
-    ports:
-      - "3000:3000"
-    environment:
-      DB_USER: sa
-      DB_PASSWORD: "YourStrong!Passw0rd"
-      DB_SERVER: db
-      DB_DATABASE: YourDatabaseName
-    depends_on:
-      - db
 
-  db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    ports:
-      - "1433:1433"
-    environment:
-      SA_PASSWORD: "YourStrong!Passw0rd"
-      ACCEPT_EULA: "Y"
-
-  httpd:
-    image: httpd:latest
+    # Відкриваємо порт 80 на зовнішньому і внутрішньому інтерфейсі
     ports:
       - "80:80"
-    volumes:
-      - ./httpd.conf:/usr/local/apache2/conf/
+
+    # Залежимо від контейнера з базою даних
     depends_on:
-      - web
+      - db
