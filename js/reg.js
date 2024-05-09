@@ -1,31 +1,39 @@
 /* Реєстрація і вхід, відновлення паролю */
 document.addEventListener("DOMContentLoaded", function() {
-  const loginForm = document.getElementById("login-form");
-  const signupButton = document.getElementById("signup-button");
-  const forgotPasswordButton = document.getElementById("forgot-password-button");
+  // Отримуємо потрібні елементи зі сторінки
+  const registerLink = document.getElementById("registerLink");
+  const loginLink = document.getElementById("loginLink");
+  const forgotPasswordLink = document.getElementById("forgotPasswordLink");
 
-  // Переключення на форму реєстрації
-  signupButton.addEventListener("click", function() {
-    // Тут ви можете додати код для показу форми реєстрації
+  // Реєстрація
+  registerLink.addEventListener("click", function() {
+    // Приховуємо перший .wrapper (ймовірно, форма входу)
+    document.querySelectorAll(".wrapper")[0].style.display = "none";
+    // Показуємо другий .wrapper (ймовірно, форма реєстрації)
+    document.querySelectorAll(".wrapper")[1].style.display = "block";
   });
 
-  // Переключення на форму відновлення паролю
-  forgotPasswordButton.addEventListener("click", function() {
-    // Тут ви можете додати код для показу форми відновлення паролю
+  // Вхід
+  loginLink.addEventListener("click", function() {
+    // Приховуємо другий .wrapper (форма реєстрації)
+    document.querySelectorAll(".wrapper")[1].style.display = "none";
+    // Показуємо перший .wrapper (форма входу)
+    document.querySelectorAll(".wrapper")[0].style.display = "block";
   });
 
-  // Обробка форми входу
-  loginForm.addEventListener("submit", function(event) {
-    event.preventDefault(); // Запобігаємо перезавантаженню сторінки
+  // Створення нового паролю
+  forgotPasswordLink.addEventListener("click", function() {
+    // Приховуємо перший .wrapper (форма входу)
+    document.querySelectorAll(".wrapper")[0].style.display = "none";
+    // Показуємо третій .wrapper (ймовірно, форма для відновлення паролю)
+    document.querySelectorAll(".wrapper")[2].style.display = "block";
+  });
 
-    const emailInput = document.getElementById("email-input");
-    const passwordInput = document.getElementById("password-input");
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-
-    // Тут ви можете додати код для обробки даних форми входу
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const loginLinkForgotPassword = document.getElementById("loginLinkForgotPassword");
+  loginLinkForgotPassword.addEventListener("click", function() {
+    // Приховуємо третій .wrapper (форма для відновлення паролю)
+    document.querySelectorAll(".wrapper")[2].style.display = "none";
+    // Показуємо перший .wrapper (форма входу)
+    document.querySelectorAll(".wrapper")[0].style.display = "block";
   });
 });
