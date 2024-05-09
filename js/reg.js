@@ -1,82 +1,31 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // Отримуємо посилання на поля введення
-  const emailInput = document.querySelector('input[type="email"]');
-  const passwordInput = document.querySelector('input[type="password"]');
+/* Реєстрація і вхід, відновлення паролю */
+document.addEventListener("DOMContentLoaded", function() {
+  const loginForm = document.getElementById("login-form");
+  const signupButton = document.getElementById("signup-button");
+  const forgotPasswordButton = document.getElementById("forgot-password-button");
 
-  // Отримуємо посилання на кнопки
-  const loginButton = document.querySelector('button:nth-child(1)');
-  const signUpButton = document.querySelector('button:nth-child(2)');
-  const forgotPasswordButton = document.querySelector('button:nth-child(3)');
-
-  // Функція для збереження даних користувача в localStorage
-  function saveUser(email, password) {
-    const user = { email, password };
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    users.push(user);
-    localStorage.setItem('users', JSON.stringify(users));
-  }
-
-  // Функція для перевірки даних користувача
-  function checkUser(email, password) {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    return users.some(user => user.email === email && user.password === password);
-  }
-
-  // Обробник події для кнопки "Sign Up"
-  signUpButton.addEventListener('click', () => {
-    const email = emailInput.value;
-    const password = passwordInput.value;
-
-    // Перевірка, чи всі поля заповнені
-    if (email && password) {
-      // Перевірка, чи користувач з таким email вже існує
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const existingUser = users.find(user => user.email === email);
-
-      if (existingUser) {
-        alert('Користувач з таким email вже існує');
-      } else {
-        saveUser(email, password);
-        alert('Реєстрація пройшла успішно!');
-        emailInput.value = '';
-        passwordInput.value = '';
-      }
-    } else {
-      alert('Будь ласка, введіть свою електронну пошту та пароль.');
-    }
+  // Переключення на форму реєстрації
+  signupButton.addEventListener("click", function() {
+    // Тут ви можете додати код для показу форми реєстрації
   });
 
-  // Обробник події для кнопки "Login"
-  loginButton.addEventListener('click', () => {
-    const email = emailInput.value;
-    const password = passwordInput.value;
-
-    // Перевірка, чи введені дані відповідають збереженим даним користувача
-    if (checkUser(email, password)) {
-      alert('Авторизація пройшла успішно!');
-    } else {
-      alert('Невірний email або пароль');
-    }
+  // Переключення на форму відновлення паролю
+  forgotPasswordButton.addEventListener("click", function() {
+    // Тут ви можете додати код для показу форми відновлення паролю
   });
 
-  // Обробник події для кнопки "Forgot Password"
-  forgotPasswordButton.addEventListener('click', () => {
-    const email = prompt('Введіть свій email для відновлення пароля');
+  // Обробка форми входу
+  loginForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Запобігаємо перезавантаженню сторінки
 
-    if (email) {
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find(user => user.email === email);
+    const emailInput = document.getElementById("email-input");
+    const passwordInput = document.getElementById("password-input");
 
-      if (user) {
-        const newPassword = prompt('Введіть новий пароль');
-        if (newPassword) {
-          user.password = newPassword;
-          localStorage.setItem('users', JSON.stringify(users));
-          alert('Пароль було успішно оновлено');
-        }
-      } else {
-        alert('Користувач з таким email не знайдено');
-      }
-    }
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    // Тут ви можете додати код для обробки даних форми входу
+    console.log("Email:", email);
+    console.log("Password:", password);
   });
 });
