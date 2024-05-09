@@ -157,31 +157,43 @@ select:hover {
       <p>&copy; 2024 Enanas Negra</p>  
     </footer>
     <script>
-       localStorage.getItem('beforeText') || '';
-       localStorage.getItem('afterText') || '';
-        localStorage.getItem('sourceLanguage') || '';
-        localStorage.getItem('targetLanguage') || '';
+      document.getElementById('saveButton').addEventListener('click', function() {
+    // Отримуємо значення з полів форми
+    const beforeTextValue = document.getElementById('beforeText').value;
+    const afterTextValue = document.getElementById('afterText').value;
+    const sourceLanguageValue = document.getElementById('sourceLanguage').value;
+    const targetLanguageValue = document.getElementById('targetLanguage').value;
 
-        // Встановлюємо значення у відповідні елементи форми
-        document.getElementById('beforeText').value = beforeText;
-        document.getElementById('afterText').value = afterText;
-        document.getElementById('sourceLanguage').value = sourceLanguage;
-        document.getElementById('targetLanguage').value = targetLanguage;
+    // Створюємо об'єкт з даними для передачі на сервер
+    const data = {
+        beforeText: beforeTextValue,
+        afterText: afterTextValue,
+        sourceLanguage: sourceLanguageValue,
+        targetLanguage: targetLanguageValue
+    };
 
-        // Обробник події кліку на кнопці Save
-        document.getElementById('saveButton').addEventListener('click', function() {
-            // Отримуємо значення з полів форми
-            const beforeTextValue = document.getElementById('beforeText').value;
-            const afterTextValue = document.getElementById('afterText').value;
-            const sourceLanguageValue = document.getElementById('sourceLanguage').value;
-            const targetLanguageValue = document.getElementById('targetLanguage').value;
-
-            // Зберігаємо значення у localStorage
-            localStorage.setItem('beforeText', beforeTextValue);
-            localStorage.setItem('afterText', afterTextValue);
-            localStorage.setItem('sourceLanguage', sourceLanguageValue);
-            localStorage.setItem('targetLanguage', targetLanguageValue);
-        });</script>
+    // Виконуємо POST-запит на сервер
+    fetch('http://localhost:80', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Data sent successfully:', data);
+    })
+    .catch(error => {
+        console.error('There was a problem with the request:', error);
+    });
+});
+</script>
         
     <script src="js/languageSelection.js"></script>
     <script src="js/translate.js"></script>
