@@ -1,56 +1,47 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Отримуємо необхідні елементи з DOM
-    var avatarContainer = document.querySelector('.avatar-container');
+// Аватар
+// Показати/приховати вікно з інформацією про користувача та кнопку вихід з аккаунту при кліку на аватар
+document.querySelector('.avatar').addEventListener('click', function() {
     var userDetails = document.querySelector('.user-details');
-    var userNameInput = document.getElementById('user-name');
-    var userEmail = document.getElementById('user-email');
-    var loginButton = document.querySelector('button:nth-child(1)'); // Кнопка входу
-
-    // Функція для перевірки, чи користувач авторизований
-    function isLoggedIn() {
-        return localStorage.getItem('loggedIn') === 'true';
-    }
-
-    // Функція для відображення інформації про користувача
-    function showUserInfo() {
-        var email = localStorage.getItem('email');
-        userEmail.textContent = email;
-        userDetails.style.display = 'block';
-    }
-
-    // Обробник події для кнопки "Login"
-    loginButton.addEventListener('click', function() {
-        var email = document.querySelector('input[type="email"]').value;
-        var password = document.querySelector('input[type="password"]').value;
-        
-        // Перевіряємо, чи введені дані відповідають збереженим даним користувача
-        if (checkUser(email, password)) {
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('email', email);
-            alert('Авторизація пройшла успішно!');
-            showUserInfo();
-        } else {
-            alert('Невірний email або пароль');
+    if (userDetails.style.display === 'none' || userDetails.style.display === '') {
+      userDetails.style.display = 'block';
+      // Перевірка, чи користувач зареєстрований
+      if (userIsLoggedIn()) {
+        // Якщо користувач зареєстрований, відображаємо профіль
+        showUserProfile();
+      } else {
+        // Якщо користувач не зареєстрований, відображаємо повідомлення "Зареєструйтесь"
+        document.getElementById('user-name').value = 'Зареєструйтесь';
+        // Приховуємо електронну пошту
+        document.getElementById('user-email').style.display = 'none';
+        // І приховуємо кнопку вийти з аккаунту
+        var logoutButton = document.querySelector('.user-details button');
+        if (logoutButton) {
+          logoutButton.style.display = 'none';
         }
-    });
-
-    // Перевіряємо, чи користувач авторизований і відображаємо інформацію про нього
-    if (isLoggedIn()) {
-        showUserInfo();
+      }
+    } else {
+      userDetails.style.display = 'none';
     }
-
-    // Функція для виходу з аккаунту
-    function logout() {
-        localStorage.clear();
-        userDetails.style.display = 'none';
-        alert('Logged out!');
-    }
-
-    // Додаємо обробник події для кнопки виходу
-    document.getElementById('logout-button').addEventListener('click', function(event) {
-        event.stopPropagation();
-        logout();
+  });
+  
+  // Перевірка, чи користувач зареєстрований
+  function userIsLoggedIn() {
+    return false; // Змініть на true, якщо користувач зареєстрований
+  }
+  
+  // Показати профіль користувача
+  function showUserProfile() {
+    // Відображення профілю з даними користувача
+    document.getElementById('user-name').value = 'Ім\'я користувача';
+    // Приховати електронну пошту
+    document.getElementById('user-email').style.display = 'none';
+    // І показати кнопку вийти з аккаунту
+    var logoutButton = document.createElement('button');
+    logoutButton.textContent = 'Вийти з аккаунту';
+    logoutButton.addEventListener('click', function() {
+      console.log('Ви вийшли з аккаунту.');
     });
-});
-
-
+    // Кнопка вихід під ім'я та електронну пошту користувача
+    var userDetails = document.querySelector('.user-details');
+    userDetails.appendChild(logoutButton);
+  }
