@@ -4,8 +4,5 @@ CREATE TABLE Users (
     Username VARCHAR(50) NOT NULL UNIQUE,
     Email VARCHAR(100) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
-    FirstName VARCHAR(50),
-    LastName VARCHAR(50),
-    Bio TEXT,
     RegistrationDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
