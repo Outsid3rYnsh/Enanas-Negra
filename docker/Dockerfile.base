@@ -1,14 +1,14 @@
-# Використовуємо офіційний образ MongoDB
-FROM mongo:latest
+# Використовуємо офіційний образ MySQL як базовий образ
+FROM mysql:latest
 
-ENV MONGODB_HOST="mongodb://mongo:27017"
-ENV MONGODB_DATABASE="TransHistory"
-ENV MONGODB_COLLECTION="SavedHistory"
+# Задаємо середовищні змінні для MySQL
+ENV MYSQL_ROOT_PASSWORD=FuckThisDatabaseLMAO69
+ENV MYSQL_DATABASE=TransSave
+ENV MYSQL_USER=user
+ENV MYSQL_PASSWORD=password
 
+# Копіюємо файл ініціалізації до каталогу /docker-entrypoint-initdb.d/ в образі
+COPY init.sql /docker-entrypoint-initdb.d/
 
-EXPOSE 27017
-
-# Запускаємо MongoDB
-CMD ["mongod"]
 
 
