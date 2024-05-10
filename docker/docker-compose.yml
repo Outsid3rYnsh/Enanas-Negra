@@ -2,32 +2,37 @@ version: "3.8"
 
 services:
 
-  # Служба для бази даних MongoDB
+  # Служба для бази даних MySQL
   db:
-    # Збираємо контейнер бази даних з Dockerfile
-    build:
-      context: .
-      dockerfile: Dockerfile.base
-
-    # Відкриваємо порт 27017 на зовнішньому і внутрішньому інтерфейсі
+    image: mysql:latest
     ports:
-      - "27017:27017"
-
-    # Мапуємо локальний каталог для збереження даних MongoDB
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: FuckThisDatabaseLMAO69
+      MYSQL_DATABASE: TransSave
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     volumes:
-      - C:\Users\varga\Enanas-Negra\volumes:/data/db
+      - ./db_data:/var/lib/mysql
 
   # Служба для веб-додатку
   web:
-    # Збираємо контейнер веб-додатку з Dockerfile.web
     build:
       context: .
       dockerfile: Dockerfile.web
-
-    # Відкриваємо порт 80 на зовнішньому і внутрішньому інтерфейсі
     ports:
       - "80:80"
+    depends_on:
+      - db
 
-    # Залежимо від контейнера з базою даних
+  # Служба для міграції бази даних з Flyway
+  flyway:
+    image: boxfuse/flyway:latest
+    command: -url=jdbc:mysql://db:3306/TransSave?user=${user}&password=${password} migrate
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./flyway/sql:/flyway/sql
     depends_on:
       - db

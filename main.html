@@ -157,34 +157,30 @@ select:hover {
       <p>&copy; 2024 Enanas Negra</p>  
     </footer>
     <script>
-      document.getElementById('saveButton').addEventListener('click', function() {
+    document.getElementById('saveButton').addEventListener('click', function() {
     // Отримуємо значення з полів форми
     const beforeTextValue = document.getElementById('beforeText').value;
     const afterTextValue = document.getElementById('afterText').value;
     const sourceLanguageValue = document.getElementById('sourceLanguage').value;
     const targetLanguageValue = document.getElementById('targetLanguage').value;
 
-    // Створюємо об'єкт з даними для передачі на сервер
-    const data = {
-        beforeText: beforeTextValue,
-        afterText: afterTextValue,
-        sourceLanguage: sourceLanguageValue,
-        targetLanguage: targetLanguageValue
-    };
+    // Створюємо об'єкт FormData для передачі на сервер
+    const formData = new FormData();
+    formData.append('SourceLanguage', sourceLanguageValue);
+    formData.append('TargetLanguage', targetLanguageValue);
+    formData.append('SourceText', beforeTextValue);
+    formData.append('TranslatedText', afterTextValue);
 
-    // Виконуємо POST-запит на сервер
-    fetch('http://localhost:80', {
+    // Виконуємо POST-запит на сервер через Nginx
+    fetch('http://localhost:80', { // Відносний URL для Nginx
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: formData
     })
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        return response.json();
+        return response.text(); // Зчитуємо тіло відповіді сервера
     })
     .then(data => {
         console.log('Data sent successfully:', data);
@@ -193,6 +189,8 @@ select:hover {
         console.error('There was a problem with the request:', error);
     });
 });
+
+
 </script>
         
     <script src="js/languageSelection.js"></script>
