@@ -1,14 +1,5 @@
-# Використовуємо офіційний образ MySQL як базовий образ
-FROM mysql:latest
+# Використовуємо офіційний образ PostgreSQL
+FROM postgres:latest
 
-# Задаємо середовищні змінні для MySQL
-ENV MYSQL_ROOT_PASSWORD=FuckThisDatabaseLMAO69
-ENV MYSQL_DATABASE=TransSave
-ENV MYSQL_USER=user
-ENV MYSQL_PASSWORD=password
-
-# Копіюємо файл ініціалізації до каталогу /docker-entrypoint-initdb.d/ в образі
-COPY init.sql /docker-entrypoint-initdb.d/
-
-
-
+# Копіюємо міграційні SQL-файли у контейнер
+COPY *.sql /docker-entrypoint-initdb.d/

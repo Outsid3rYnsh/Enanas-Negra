@@ -1,38 +1,54 @@
 version: "3.8"
 
 services:
-
-  # Служба для бази даних MySQL
+  # Служба для бази даних PostgreSQL
   db:
-    image: mysql:latest
+    # Збираємо контейнер бази даних з Dockerfile.base
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    # Відкриваємо порт 5432 на зовнішньому і внутрішньому інтерфейсі
     ports:
-      - "3307:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: FuckThisDatabaseLMAO69
-      MYSQL_DATABASE: TransSave
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      - "5432:5432"
+    # Завантажуємо змінні середовища з файлу .env
+    env_file:
+      - ./.env
+    # Мапуємо локальний каталог для збереження даних PostgreSQL
     volumes:
-      - ./db_data:/var/lib/mysql
+      - C:\Users\varga\Enanas-Negra\volumes:/var/lib/postgresql/data
+    # Встановлюємо змінні середовища для PostgreSQL
+    environment:
+      - POSTGRES_DB=TransSave
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=55IHateDatabaseFUCKOFF55
+    # Відкриваємо порт 5432 для з'єднань з іншими контейнерами
+    expose:
+      - 5432
 
   # Служба для веб-додатку
   web:
+    # Збираємо контейнер веб-додатку з Dockerfile.web
     build:
       context: .
       dockerfile: Dockerfile.web
+    # Відкриваємо порт 80 на зовнішньому і внутрішньому інтерфейсі
     ports:
       - "80:80"
-    depends_on:
-      - db
 
-  # Служба для міграції бази даних з Flyway
-  flyway:
-    image: boxfuse/flyway:latest
-    command: -url=jdbc:mysql://db:3306/TransSave?user=${user}&password=${password} migrate
-    environment:
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+  # Служба для міграцій бази даних з використанням Flyway
+  migrations:
+    # Використовуємо образ Flyway
+    image: flyway/flyway
+    # Мапуємо каталог з міграціями SQL у контейнер Flyway
     volumes:
-      - ./flyway/sql:/flyway/sql
+      - ./migrations/db:/flyway/sql
+    # Встановлюємо змінні середовища для підключення до бази даних
+    environment:
+      - FLYWAY_URL=jdbc:postgresql://172.22.0.2:5432/TransSave
+      - FLYWAY_USER=postgres
+      - FLYWAY_PASSWORD=55IHateDatabaseFUCKOFF55
+    # Виконуємо міграції при старті контейнера
+    command: ["migrate"]
+    # Залежимо від контейнера з базою даних
     depends_on:
       - db
