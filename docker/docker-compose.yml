@@ -3,6 +3,7 @@ version: "3.8"
 services:
   # Служба для бази даних PostgreSQL
   db:
+    image: postgres
     # Збираємо контейнер бази даних з Dockerfile.base
     build:
       context: .
@@ -24,6 +25,7 @@ services:
     # Відкриваємо порт 5432 для з'єднань з іншими контейнерами
     expose:
       - 5432
+
 
   # Служба для веб-додатку
   web:
