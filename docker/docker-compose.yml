@@ -18,6 +18,8 @@ services:
       dockerfile: Dockerfile.web
     ports:
       - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
   db:
     image: postgres:latest
     restart: always
