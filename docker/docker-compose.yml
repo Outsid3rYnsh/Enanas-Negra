@@ -1,56 +1,40 @@
-version: "3.8"
+version: '3.1'
 
 services:
-  # Служба для бази даних PostgreSQL
-  db:
-    image: postgres
-    # Збираємо контейнер бази даних з Dockerfile.base
-    build:
-      context: .
-      dockerfile: Dockerfile.base
-    # Відкриваємо порт 5432 на зовнішньому і внутрішньому інтерфейсі
-    ports:
-      - "5432:5432"
-    # Завантажуємо змінні середовища з файлу .env
-    env_file:
-      - ./.env
-    # Мапуємо локальний каталог для збереження даних PostgreSQL
+  app:
+    build: 
+     context: .
+     dockerfile: Dockerfile
+    command: node index.js
     volumes:
-      - C:\Users\varga\Enanas-Negra\volumes:/var/lib/postgresql/data
-    # Встановлюємо змінні середовища для PostgreSQL
-    environment:
-      - POSTGRES_DB=TransSave
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=55IHateDatabaseFUCKOFF55
-    # Відкриваємо порт 5432 для з'єднань з іншими контейнерами
-    expose:
-      - 5432
-
-
-  # Служба для веб-додатку
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
   web:
-    # Збираємо контейнер веб-додатку з Dockerfile.web
     build:
       context: .
       dockerfile: Dockerfile.web
-    # Відкриваємо порт 80 на зовнішньому і внутрішньому інтерфейсі
     ports:
-      - "80:80"
-
-  # Служба для міграцій бази даних з використанням Flyway
-  migrations:
-    # Використовуємо образ Flyway
-    image: flyway/flyway
-    # Мапуємо каталог з міграціями SQL у контейнер Flyway
-    volumes:
-      - ./migrations/db:/flyway/sql
-    # Встановлюємо змінні середовища для підключення до бази даних
+      - 80:80
+  db:
+    image: postgres:latest
+    restart: always
     environment:
-      - FLYWAY_URL=jdbc:postgresql://172.22.0.2:5432/TransSave
-      - FLYWAY_USER=postgres
-      - FLYWAY_PASSWORD=55IHateDatabaseFUCKOFF55
-    # Виконуємо міграції при старті контейнера
-    command: ["migrate"]
-    # Залежимо від контейнера з базою даних
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: BDshechka
+    ports:
+     - 5432:5432
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+  flyway:
+    image: flyway/flyway:latest
+    command: -url=jdbc:postgresql://db:5432/BDshechka -user=postgres -password=example migrate
+    volumes:
+      - ./sql:/flyway/sql
     depends_on:
       - db
